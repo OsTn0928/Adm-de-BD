@@ -49,6 +49,11 @@ CREATE TABLE Aeropuertos (
 CREATE TABLE Estado_Reserva (
     id_estado_reserva INT PRIMARY KEY,
     nombre_estado VARCHAR(50) NOT NULL UNIQUE
+    descripcion VARCHAR(255) NOT NULL,
+    created DATETIME NOT NULL,
+    modified DATETIME NOT NULL,
+    deleted BOOLEAN NOT NULL DEFAULT FALSE,
+    user_id INT NOT NULL
 );
 
 CREATE TABLE Vuelos (
@@ -121,11 +126,21 @@ CREATE TABLE Reservas_Vuelos (
 CREATE TABLE Clases (
     id_clase INT PRIMARY KEY,
     nombre_clase VARCHAR(50) NOT NULL UNIQUE
+    descripcion VARCHAR(255) NOT NULL,
+    created DATETIME NOT NULL,
+    modified DATETIME NOT NULL,
+    deleted BOOLEAN NOT NULL DEFAULT FALSE,
+    user_id INT NOT NULL
 );
 
 CREATE TABLE Estado_Asientos (
     id_estado_asiento INT PRIMARY KEY,
     nombre_estado VARCHAR(50) NOT NULL UNIQUE
+    descripcion VARCHAR(255) NOT NULL,
+    created DATETIME NOT NULL,
+    modified DATETIME NOT NULL,
+    deleted BOOLEAN NOT NULL DEFAULT FALSE,
+    user_id INT NOT NULL
 );
 
 CREATE TABLE Asientos (
