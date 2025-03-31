@@ -5,9 +5,9 @@ CREATE TABLE Tipo_Usuarios (
     id_tipo_usuario INT PRIMARY KEY,
     nombre_tipo VARCHAR(100) NOT NULL UNIQUE,
     descripcion TEXT NOT NULL,
-    CREATED DATETIME NOT NULL,
-    MODIFIED DATETIME NOT NULL,
-    DELETED BOOLEAN NOT NULL DEFAULT FALSE
+    created DATETIME NOT NULL,
+    modified DATETIME NOT NULL,
+    deleted BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE Usuarios (
@@ -16,9 +16,9 @@ CREATE TABLE Usuarios (
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     id_tipo_usuario INT NOT NULL,
-    CREATED DATETIME NOT NULL,
-    MODIFIED DATETIME NOT NULL,
-    DELETED BOOLEAN NOT NULL DEFAULT FALSE,
+    created DATETIME NOT NULL,
+    modified DATETIME NOT NULL,
+    deleted BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (id_tipo_usuario) REFERENCES Tipo_Usuarios(id_tipo_usuario)
 );
 
@@ -26,9 +26,9 @@ CREATE TABLE Ubicaciones (
     id_ubicacion INT PRIMARY KEY,
     ciudad VARCHAR(255) NOT NULL,
     pais VARCHAR(255) NOT NULL,
-    CREATED DATETIME NOT NULL,
-    MODIFIED DATETIME NOT NULL,
-    DELETED BOOLEAN NOT NULL DEFAULT FALSE
+    created DATETIME NOT NULL,
+    modified DATETIME NOT NULL,
+    deleted BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE Aeropuertos (
@@ -36,9 +36,9 @@ CREATE TABLE Aeropuertos (
     nombre VARCHAR(255) NOT NULL UNIQUE,
     codigo_iata VARCHAR(10) UNIQUE NOT NULL,
     id_ubicacion INT NOT NULL,
-    CREATED DATETIME NOT NULL,
-    MODIFIED DATETIME NOT NULL,
-    DELETED BOOLEAN NOT NULL DEFAULT FALSE,
+    created DATETIME NOT NULL,
+    modified DATETIME NOT NULL,
+    deleted BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (id_ubicacion) REFERENCES Ubicaciones(id_ubicacion)
 );
 
@@ -48,9 +48,9 @@ CREATE TABLE Vuelos (
     aerolinea VARCHAR(255) NOT NULL,
     id_origen INT NOT NULL,
     id_destino INT NOT NULL,
-    CREATED DATETIME NOT NULL,
-    MODIFIED DATETIME NOT NULL,
-    DELETED BOOLEAN NOT NULL DEFAULT FALSE,
+    created DATETIME NOT NULL,
+    modified DATETIME NOT NULL,
+    deleted BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (id_origen) REFERENCES Aeropuertos(id_aeropuerto),
     FOREIGN KEY (id_destino) REFERENCES Aeropuertos(id_aeropuerto)
 );
@@ -60,9 +60,9 @@ CREATE TABLE Vuelos_Programados (
     id_vuelo INT NOT NULL,
     fecha_hora_salida DATETIME NOT NULL,
     fecha_hora_llegada DATETIME NOT NULL,
-    CREATED DATETIME NOT NULL,
-    MODIFIED DATETIME NOT NULL,
-    DELETED BOOLEAN NOT NULL DEFAULT FALSE,
+    created DATETIME NOT NULL,
+    modified DATETIME NOT NULL,
+    deleted BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (id_vuelo) REFERENCES Vuelos(id_vuelo)
 );
 
@@ -72,9 +72,9 @@ CREATE TABLE Escalas (
     id_aeropuerto INT NOT NULL,
     fecha_hora_llegada DATETIME NOT NULL,
     fecha_hora_salida DATETIME NOT NULL,
-    CREATED DATETIME NOT NULL,
-    MODIFIED DATETIME NOT NULL,
-    DELETED BOOLEAN NOT NULL DEFAULT FALSE,
+    created DATETIME NOT NULL,
+    modified DATETIME NOT NULL,
+    deleted BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (id_vuelo_programado) REFERENCES Vuelos_Programados(id_vuelo_programado),
     FOREIGN KEY (id_aeropuerto) REFERENCES Aeropuertos(id_aeropuerto)
 );
@@ -86,9 +86,9 @@ CREATE TABLE Reservas (
     cantidad_pasajeros INT NOT NULL,
     costo_total DECIMAL(10,2) NOT NULL,
     estado_reserva VARCHAR(50) NOT NULL,
-    CREATED DATETIME NOT NULL,
-    MODIFIED DATETIME NOT NULL,
-    DELETED BOOLEAN NOT NULL DEFAULT FALSE,
+    created DATETIME NOT NULL,
+    modified DATETIME NOT NULL,
+    deleted BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
 );
 
@@ -96,9 +96,9 @@ CREATE TABLE Reservas_Vuelos (
     id_reserva_vuelo INT PRIMARY KEY,
     id_reserva INT NOT NULL,
     id_vuelo_programado INT NOT NULL,
-    CREATED DATETIME NOT NULL,
-    MODIFIED DATETIME NOT NULL,
-    DELETED BOOLEAN NOT NULL DEFAULT FALSE,
+    created DATETIME NOT NULL,
+    modified DATETIME NOT NULL,
+    deleted BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (id_reserva) REFERENCES Reservas(id_reserva),
     FOREIGN KEY (id_vuelo_programado) REFERENCES Vuelos_Programados(id_vuelo_programado)
 );
@@ -109,8 +109,8 @@ CREATE TABLE Asientos (
     numero_asiento VARCHAR(10) NOT NULL UNIQUE,
     clase VARCHAR(50) NOT NULL,
     estado VARCHAR(50) NOT NULL,
-    CREATED DATETIME NOT NULL,
-    MODIFIED DATETIME NOT NULL,
-    DELETED BOOLEAN NOT NULL DEFAULT FALSE,
+    created DATETIME NOT NULL,
+    modified DATETIME NOT NULL,
+    deleted BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (id_reserva) REFERENCES Reservas(id_reserva)
 );
