@@ -1,0 +1,1 @@
+#Ejercicio 1:Crear una función que reciba un número entero ingresado por el usuario y evalúe, si el valor ingresado es: mayor, menor o igual a 10, aplique estructuras de control if, else, además try para controlar las excepciones.
