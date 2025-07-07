@@ -108,43 +108,44 @@ INSERT INTO personas
 -- 1.- Mostrar todos los usuarios de tipo Cliente
 -- Seleccionar nombre de usuario, correo y tipo_usuario
 SELECT u.nombre AS username, u.email, tu.descripcion AS tipo_usuario
-FROM usuarios u
-JOIN tipo_usuarios tu ON u.id_tipo = tu.id_tipo
-WHERE tu.descripcion = 'Cliente';
+FROM usuarios u, tipo_usuarios tu
+WHERE u.id_tipo = tu.id_tipo
+AND tu.descripcion = 'Cliente';
 
 -- 2.- Mostrar Personas nacidas después del año 1990
 -- Seleccionar Nombre, fecha de nacimiento y username
 SELECT p.nombre_completo, p.fecha_nac, u.nombre AS username
-FROM personas p
-JOIN usuarios u ON p.id_usuario = u.id_usuario
-WHERE p.fecha_nac > '1990-01-01';
+FROM personas p, usuarios u
+WHERE p.id_usuario = u.id_usuario
+AND p.fecha_nac > '1990-01-01';
 
 -- 3.- Seleccionar nombres de personas que comiencen con la letra A
 -- Seleccionar nombre y correo de la persona
 SELECT p.nombre_completo, u.email
-FROM personas p
-JOIN usuarios u ON p.id_usuario = u.id_usuario
-WHERE p.nombre_completo LIKE 'A%';
+FROM personas p, usuarios u
+WHERE p.id_usuario = u.id_usuario
+AND p.nombre_completo LIKE 'A%';
 
 -- 4.- Mostrar usuarios cuyos dominios de correo sean mail.com
-SELECT nombre, email
-FROM usuarios
-WHERE email LIKE '%@mail.com';
+SELECT u.nombre, u.email
+FROM usuarios u
+WHERE u.email LIKE '%@mail.com';
 
 -- 5.- Mostrar todas las personas que no viven en Valparaíso y su usuario + ciudad
 SELECT p.nombre_completo, u.nombre AS username, c.nombre_ciudad
-FROM personas p
-JOIN usuarios u ON p.id_usuario = u.id_usuario
-JOIN ciudad c ON p.id_ciudad = c.id_ciudad
-WHERE c.nombre_ciudad <> 'Valparaíso';
+FROM personas p, usuarios u, ciudad c
+WHERE p.id_usuario = u.id_usuario
+AND p.id_ciudad = c.id_ciudad
+AND c.nombre_ciudad <> 'Valparaíso';
 
 -- 6.- Mostrar usuarios que contengan más de 7 caracteres de longitud en el nombre
-SELECT nombre
-FROM usuarios
-WHERE CHAR_LENGTH(nombre) > 7;
+SELECT u.nombre
+FROM usuarios u
+WHERE CHAR_LENGTH(u.nombre) > 7;
 
 -- 7.- Mostrar username de personas nacidas entre 1990 y 1995
 SELECT u.nombre AS username
-FROM personas p
-JOIN usuarios u ON p.id_usuario = u.id_usuario
-WHERE p.fecha_nac BETWEEN '1990-01-01' AND '1995-12-31';
+FROM personas p, usuarios u
+WHERE p.id_usuario = u.id_usuario
+AND p.fecha_nac BETWEEN '1990-01-01' AND '1995-12-31';
+
